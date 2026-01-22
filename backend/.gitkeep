@@ -1,0 +1,3 @@
+# This file exists to ensure the backend folder is tracked by Git
+# (Git doesn't track empty folders)
+# This folder will contain the FastAPI backend code

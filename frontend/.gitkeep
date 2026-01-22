@@ -1,0 +1,3 @@
+# This file exists to ensure the frontend folder is tracked by Git
+# (Git doesn't track empty folders)
+# This folder will contain the Flask frontend code (later React)
