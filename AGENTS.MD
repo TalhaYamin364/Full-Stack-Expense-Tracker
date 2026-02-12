@@ -20,6 +20,16 @@
 - New to APIs, backend frameworks, databases, and frontend development
 - Learning step-by-step, needs clear explanations
 
+# TODO: Add knowledge here
+```
+    1. Fill with strengths and current experience level.
+    2. Even include business oriented knowledge.
+   5. Phase 1: FastAPI Backend (CURRENT - NOT STARTED)- [ ] Hardcode some responses if those are needed since there is no database added at the moment. Some basic stubbing will be needed to be done at the beginning.
+   6. Phase 2: Flask Frontend - Expectation for the front end. Plain HTML, no need to worry about css. Maybe some javascript. We need to check if the flask app makes the call and recieves that call all the way to the back of the stack on fast api.
+   7. Keep work logs in the docs, or have a session log each time we work.
+   8. Make it seperate from agents.md and have a seperate folder of sessions log - This is normally called progressive disclosure for AIs and growing windows of context. 
+   9. Look into Ralf loops - related to above and keeping context window as clean as possible.
+
 **Learning Objectives:**
 1. Understand what APIs are and how they work
 2. Learn FastAPI for building backend services
@@ -59,20 +69,31 @@
 
 ## Original Application Reference
 
-The original CLI expense tracker is located at:
-`/Users/talha.yamin/Adept Projects/Adept-Projects/Expense Tracker/main.py`
+The CLI expense tracker has two versions in `src/backend/`:
 
-**Original Features:**
-- Add expense (amount + category)
-- List all expenses
-- Calculate total expenses
-- Filter expenses by category
+1. **expense_tracker_simple.py** (~54 lines)
+   - Minimal implementation for learning
+   - Basic functionality without validation
+   
+2. **main.py** (~229 lines) - CURRENT REFERENCE
+   - Production-quality code with validation
+   - Enhanced UX with formatted output
+   - Type hints and comprehensive docstrings
+   - Input validation for amounts and categories
+   - Case-insensitive category filtering
+
+**Current Features:**
+- Add expense with validated amount and category
+- List all expenses in formatted table
+- Calculate total expenses with count
+- Filter expenses by category (case-insensitive)
+- User-friendly menu with error handling
 
 **Target Features (CRUD Operations):**
-- **C**reate: Add new expense
-- **R**ead: List expenses, filter by category, get totals
-- **U**pdate: Edit existing expense
-- **D**elete: Remove expense
+- **C**reate: Add new expense ✓ (already implemented in CLI)
+- **R**ead: List expenses, filter by category, get totals ✓ (already implemented)
+- **U**pdate: Edit existing expense (NEW - add to API)
+- **D**elete: Remove expense (NEW - add to API)
 
 ---
 
@@ -109,11 +130,21 @@ The original CLI expense tracker is located at:
 Full-Stack Expense Tracker/
 ├── AGENTS.MD           # This file - AI context
 ├── README.md           # Human-readable project overview
+├── TASKS.md            # Current tasks and progress tracking
 ├── .gitignore          # Git ignore rules
-├── backend/            # FastAPI backend (Phase 1)
-│   └── (empty - to be built)
-└── frontend/           # Flask frontend (Phase 2), later React
-    └── (empty - to be built)
+├── docs/               # Documentation and session logs
+│   ├── README.md       # Docs overview
+│   └── sessions/       # Progressive disclosure - session-by-session logs
+├── src/                # Source code
+│   ├── backend/        # FastAPI backend (Phase 1)
+│   │   ├── main.py                      # Full CLI version (229 lines)
+│   │   └── expense_tracker_simple.py    # Simple CLI version (54 lines)
+│   └── frontend/       # Flask frontend (Phase 2), later React
+├── tests/              # Test files
+│   ├── backend/        # Backend tests
+│   └── frontend/       # Frontend tests
+├── artifacts/          # Build outputs, generated files
+└── venv/               # Python virtual environment (gitignored)
 ```
 
 ---
@@ -148,3 +179,12 @@ When helping with this project:
 - Created AGENTS.MD, README.md, .gitignore
 - Established 3-tier architecture plan
 - Next: Begin Phase 1 - FastAPI Backend
+
+### Session 2 - February 2, 2026
+- Updated AGENTS.MD with detailed developer context
+- Created folders: `src/`, `tests/`, `artifacts/`
+- Clarified skill level: Strong in SQL/Python/DBT, learning web development
+- Career goal: Data Engineer, Backend Developer, or Full-Stack Developer
+- Timeline: Few months, job search active
+- Reviewed existing CLI code: Two versions (simple & full)
+- Next: Set up virtual environment, begin Phase 1 (FastAPI backend)
