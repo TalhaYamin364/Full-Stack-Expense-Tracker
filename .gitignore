@@ -27,6 +27,12 @@ ENV/
 .DS_Store
 Thumbs.db
 
+# AI Context & Personal Notes (local only)
+AGENTS.MD
+TASKS.md
+6-Month-SE-Transition-Plan.md
+docs/sessions/
+
 # Node (for React later)
 node_modules/
 npm-debug.log
