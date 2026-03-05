@@ -72,6 +72,43 @@ def get_expense_by_id(expense_id: int) -> Optional[Dict]:
     return None
 
 
+def update_expense(expense_id: int, amount: Optional[float] = None, category: Optional[str] = None, description: Optional[str] = None) -> Optional[Dict]:
+    """
+    Update an existing expense in storage.
+    
+    Only updates the fields you provide — leaves others unchanged.
+    This is called a "partial update" (like UPDATE ... SET col = val WHERE id = ?).
+    
+    Args:
+        expense_id: The ID of the expense to update
+        amount: New amount (optional — only updates if provided)
+        category: New category (optional — only updates if provided)
+        description: New description (optional — only updates if provided)
+    
+    Returns:
+        The updated expense dictionary if found, None if not found
+    """
+    # First, find the expense (reuse our existing function!)
+    expense = get_expense_by_id(expense_id)
+    
+    if expense is None:
+        print(f"⚠️  Update failed: No expense with ID={expense_id}")
+        return None
+    
+    # Only update fields that were provided (not None)
+    # This lets the caller update just one field without touching the others
+    if amount is not None:
+        expense["amount"] = amount
+    if category is not None:
+        expense["category"] = category
+    if description is not None:
+        expense["description"] = description
+    
+    print(f"✏️  Updated expense: ID={expense['id']}, Amount=${expense['amount']}, Category={expense['category']}")
+    
+    return expense
+
+
 def delete_expense(expense_id: int) -> bool:
     """
     Delete an expense from storage.
