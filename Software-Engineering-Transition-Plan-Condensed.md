@@ -11,7 +11,9 @@
 **Approach:** Backend-first, depth over breadth, iterative refactor, weekly mentor check-ins
 
 **Project:** Full-Stack Expense Tracker (CLI → Web App)  
-**Tech Stack:** Flask/Jinja2 (later React) → FastAPI → SQLite/SQLAlchemy
+**Tech Stack:** Flask/Jinja2 + React (both frontends) → FastAPI → SQLite/SQLAlchemy
+
+> **Architecture Note:** Both frontends (Flask and React) coexist, sharing the same FastAPI backend and SQLite database.
 
 ---
 
@@ -43,7 +45,7 @@
 
 ---
 
-## Phase 2: Full-Stack Integration (Weeks 5-8, ~12-20 hours)
+## Phase 2: Frontend Development (Weeks 5-12, ~24-40 hours)
 
 ### Week 5-6: Flask Frontend + Jinja2
 **Goal:** Build functional UI that consumes FastAPI backend
@@ -58,7 +60,48 @@
 
 ---
 
-### Week 7-8: Software Design Fundamentals
+### Week 7-8: JavaScript Fundamentals
+**Goal:** Learn the language of the web before diving into React
+
+**Core Concepts:**
+- Variables, functions, arrow functions, callbacks
+- ES6+ features: destructuring, spread operator, template literals, modules
+- Promises and async/await
+- DOM manipulation basics, JSON parsing
+
+**Deliverable:** JavaScript exercises fetching data from FastAPI endpoints using fetch()
+
+---
+
+### Week 9-10: React Basics
+**Goal:** Understand component-based UI development
+
+**Core Concepts:**
+- JSX syntax, functional components, props, children
+- State management with useState, side effects with useEffect
+- Event handling, conditional rendering, lists
+- Component composition (parent/child data flow)
+
+**Deliverable:** Static React components (ExpenseItem, ExpenseList, ExpenseForm) with local state
+
+---
+
+### Week 11-12: React + FastAPI Integration
+**Goal:** Build the Expense Tracker React frontend connected to existing API
+
+**Core Concepts:**
+- Fetching data using fetch() or axios, loading/error states
+- CORS configuration, environment variables
+- API service layer (separate fetch logic from components)
+- Controlled forms, validation
+
+**Deliverable:** Full CRUD React frontend sharing same FastAPI backend as Flask version
+
+---
+
+## Phase 3: Software Design, Auth & Testing (Weeks 13-18, ~18-30 hours)
+
+### Week 13-14: Software Design Fundamentals
 **Goal:** Refactor for maintainability and production readiness
 
 **Core Concepts:**
@@ -71,9 +114,7 @@
 
 ---
 
-## Phase 3: Quality & Security (Weeks 9-12, ~12-20 hours)
-
-### Week 9-10: Authentication & Authorization
+### Week 15-16: Authentication & Authorization
 **Goal:** Add user management and secure endpoints
 
 **Core Concepts:**
@@ -86,7 +127,7 @@
 
 ---
 
-### Week 11-12: Testing & CI/CD
+### Week 17-18: Testing & CI/CD
 **Goal:** Automated testing and deployment pipelines
 
 **Core Concepts:**
@@ -99,25 +140,25 @@
 
 ---
 
-## Phase 4: Advanced Features (Weeks 13-16, ~12-20 hours)
+## Phase 4: Advanced Features (Weeks 19-22, ~12-20 hours)
 
-### Week 13-16: Multi-Tenancy + RBAC + API Keys
+### Week 19-22: Multi-Tenancy + RBAC + API Keys + CI/CD
 **Goal:** Add enterprise SaaS patterns to Expense Tracker
 
 **Core Concepts:**
-- Multi-tenancy: organization/workspace data isolation (`tenant_id` scoping)
+- Multi-tenancy: organization/workspace data isolation (tenant_id scoping)
 - RBAC: Owner/Admin/Member roles with permission middleware
 - API key generation/storage (hashed), validation, revocation
 - Usage tracking (API calls per org/user), rate limiting
-- Onboarding flow (sign up → create workspace → invite team)
+- GitHub Actions CI/CD pipelines
 
-**Deliverable:** Multi-org Expense Tracker with role-based permissions, API key access, usage dashboard
+**Deliverable:** Multi-org Expense Tracker with role-based permissions, API key access, CI/CD pipeline
 
 ---
 
-## Phase 5: Architecture & Scale (Weeks 17-20, ~12-20 hours)
+## Phase 5: Architecture & Scale (Weeks 23-26, ~12-20 hours)
 
-### Week 17-18: Architecture Patterns
+### Week 23-24: Architecture Patterns
 **Goal:** Think beyond single apps to system design
 
 **Core Concepts:**
@@ -129,7 +170,7 @@
 
 ---
 
-### Week 19-20: Design Patterns & Clean Code
+### Week 25-26: Design Patterns & Clean Code
 **Goal:** Write professional-grade maintainable code
 
 **Core Concepts:**
@@ -141,21 +182,9 @@
 
 ---
 
-## Phase 6: Frontend & Deployment (Weeks 21-24, ~12-20 hours)
+## Phase 6: Deployment & Team Readiness (Weeks 27-28, ~6-10 hours)
 
-### Week 21-22: React Basics
-**Goal:** Migrate from Flask to modern frontend
-
-**Core Concepts:**
-- JavaScript fundamentals (promises, async/await)
-- React: components, props, state, hooks (useState, useEffect)
-- API fetching in React, component lifecycle
-
-**Deliverable:** React frontend replacing Flask, calling FastAPI
-
----
-
-### Week 23-24: Deployment & Team Readiness
+### Week 27-28: Deployment & Team Readiness
 **Goal:** Deploy to production, prepare for team collaboration
 
 **Core Concepts:**
@@ -174,7 +203,7 @@
 2. **MVP Scope:** Minimum for Phase 1-2 to prove end-to-end value quickly?
 3. **FastAPI Structure:** Best practices for routers/services/repositories from Day 1?
 4. **Testing Strategy:** Which tests are critical early (unit vs integration)?
-5. **Optimizely Alignment:** Which topics matter most—auth, multi-tenancy, CI/CD, architecture?
+5. **Optimizely Alignment:** Which topics matter most — auth, multi-tenancy, CI/CD, architecture?
 
 ---
 
@@ -183,7 +212,7 @@
 | Checkpoint | Deliverable | Mentor Focus |
 |-----------|-------------|--------------|
 | **A** | FastAPI CRUD + Pydantic + `/docs` | API design, validation, documentation |
-| **B** | Flask UI <-> API integration | Full-stack data flow, error handling |
+| **B** | Flask UI + React UI (both working) | Server-side vs client-side rendering |
 | **C** | DB-backed CRUD + migrations | ORM usage, schema evolution |
 | **D** | Auth + tests + CI green | Security, test coverage, automation |
 | **E** | Multi-tenancy + RBAC + API keys | Enterprise patterns, data isolation |
