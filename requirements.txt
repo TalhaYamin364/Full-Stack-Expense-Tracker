@@ -2,8 +2,9 @@
 fastapi>=0.104.0
 uvicorn[standard]>=0.24.0
 
-# Database (for Phase 3)
+# Database
 sqlalchemy>=2.0.0
+alembic>=1.13.0
 
 # Frontend dependencies (for Phase 2)
 flask>=3.0.0
