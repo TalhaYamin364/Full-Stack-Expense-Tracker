@@ -37,7 +37,7 @@ To run this server:
 from fastapi import FastAPI
 from api.routes import router
 from api.database import engine
-from api.db_models import Expense  # noqa: F401 — imported so SQLAlchemy knows about it
+from api.db_models import Expense, User  # noqa: F401 — imported so SQLAlchemy's Base.metadata knows about both tables
 
 # ─── CREATE DATABASE TABLES ────────────────────────────────
 # This is the equivalent of running:
