@@ -33,7 +33,18 @@ TASKS.md
 6-Month-SE-Transition-Plan.md
 Software-Engineering-Transition-Plan-Condensed.md
 Software-Engineering-Transition-Plan-Condensed.pdf
+
+# Docs (local only — only README is public)
+docs/learning-tracker.md
+docs/phases/
 docs/sessions/
+docs/team-engagement.md
+
+# GitHub Copilot context & instructions (local only)
+# PULL_REQUEST_TEMPLATE.md is tracked — GitHub reads it from the repo
+.github/copilot-instructions.md
+.github/instructions/
+.github/appmod/
 
 # Node (for React later)
 node_modules/
