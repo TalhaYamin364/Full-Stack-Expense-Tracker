@@ -27,9 +27,69 @@ Naming Convention:
   This keeps them easy to tell apart.
 """
 
-from sqlalchemy import Column, Integer, Numeric, String, DateTime
+from sqlalchemy import Column, Integer, Numeric, String, DateTime, ForeignKey
+from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from api.database import Base
+
+
+class User(Base):
+    """
+    The 'users' table in our database.
+
+    This is the SQLAlchemy equivalent of:
+
+      CREATE TABLE users (
+          id              INTEGER PRIMARY KEY AUTOINCREMENT,
+          email           VARCHAR NOT NULL UNIQUE,
+          hashed_password VARCHAR NOT NULL,
+          created_at      TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+      );
+
+    Why store hashed_password and not password?
+      Never store plaintext passwords. A hash is a one-way transformation:
+      "mysecret" → "$2b$12$...". You can verify a login attempt by hashing
+      the incoming password and comparing, but you can never reverse it.
+      Actual hashing logic (bcrypt) is added in Phase 3 (auth week).
+
+    Relationship to Expense:
+      One User has many Expenses. The FK lives on the Expense side
+      (expenses.user_id → users.id), same as in a SQL schema.
+      The relationship() below lets you write:
+        user.expenses  → list of all Expense rows for that user
+    """
+
+    __tablename__ = "users"
+
+    id = Column(
+        Integer,
+        primary_key=True,
+        index=True
+    )
+
+    email = Column(
+        String,
+        nullable=False,
+        unique=True,   # No two users can share an email — enforced at DB level
+        index=True     # Index for fast lookups by email at login
+    )
+
+    hashed_password = Column(
+        String,
+        nullable=False
+        # Plaintext passwords are never stored. Phase 3 adds bcrypt hashing.
+    )
+
+    created_at = Column(
+        DateTime,
+        default=func.now(),
+        nullable=False
+    )
+
+    # SQLAlchemy relationship — not a DB column, just a Python convenience.
+    # Lets you do: user.expenses → [Expense, Expense, ...]
+    # back_populates="user" means Expense.user points back here.
+    expenses = relationship("Expense", back_populates="user")
 
 
 class Expense(Base):
@@ -43,7 +103,8 @@ class Expense(Base):
           amount      DECIMAL(10,2) NOT NULL,
           category    VARCHAR NOT NULL,
           description VARCHAR DEFAULT '',
-          created_at  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+          created_at  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+          user_id     INTEGER REFERENCES users(id)
       );
 
     Each instance of this class represents ONE ROW in the table.
@@ -103,3 +164,18 @@ class Expense(Base):
         #   datetime.utcnow = Python generates the timestamp on the app server
         #   DB-side is more reliable — doesn't depend on the app server's clock.
     )
+
+    user_id = Column(
+        Integer,
+        ForeignKey("users.id"),
+        nullable=True,  # Nullable for now — Phase 3 auth will enforce this.
+        index=True      # Index for fast lookups by user once auth is added.
+        # Why nullable? We don't have auth yet, so we can't assign expenses
+        # to a real user. Making it nullable avoids having to seed a dummy
+        # user just to insert expenses during development.
+        # When Phase 3 adds JWT auth, every new expense will have a user_id.
+    )
+
+    # Relationship back to User — lets you do: expense.user → User object
+    # back_populates="expenses" means User.expenses points back here.
+    user = relationship("User", back_populates="expenses")

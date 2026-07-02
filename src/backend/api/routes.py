@@ -61,7 +61,7 @@ router = APIRouter()
 
 # ─── CREATE ─────────────────────────────────────────────
 @router.post("/", response_model=ExpenseResponse, status_code=201)
-def create_expense(expense_data: ExpenseCreate, db: Session = Depends(get_db)):
+def create_expense(expense_data: ExpenseCreate, db: Session = Depends(get_db)) -> Expense:
     """
     Create a new expense.
 
@@ -92,7 +92,7 @@ def create_expense(expense_data: ExpenseCreate, db: Session = Depends(get_db)):
 
 # ─── READ ALL ───────────────────────────────────────────
 @router.get("/", response_model=List[ExpenseResponse])
-def list_expenses(db: Session = Depends(get_db)):
+def list_expenses(db: Session = Depends(get_db)) -> List[Expense]:
     """
     Get all expenses.
 
@@ -110,7 +110,7 @@ def list_expenses(db: Session = Depends(get_db)):
 
 # ─── READ ONE ───────────────────────────────────────────
 @router.get("/{expense_id}", response_model=ExpenseResponse)
-def get_expense(expense_id: int = Path(gt=0), db: Session = Depends(get_db)):
+def get_expense(expense_id: int = Path(gt=0), db: Session = Depends(get_db)) -> Expense:
     """
     Get a single expense by its ID.
 
@@ -133,7 +133,7 @@ def get_expense(expense_id: int = Path(gt=0), db: Session = Depends(get_db)):
 
 # ─── UPDATE ─────────────────────────────────────────────
 @router.patch("/{expense_id}", response_model=ExpenseResponse)
-def update_expense(expense_id: int = Path(gt=0), expense_data: ExpenseUpdate = Body(), db: Session = Depends(get_db)):
+def update_expense(expense_id: int = Path(gt=0), expense_data: ExpenseUpdate = Body(), db: Session = Depends(get_db)) -> Expense:
     """
     Partially update an existing expense.
 
@@ -178,7 +178,7 @@ def update_expense(expense_id: int = Path(gt=0), expense_data: ExpenseUpdate = B
 
 # ─── DELETE ─────────────────────────────────────────────
 @router.delete("/{expense_id}", status_code=204, response_class=Response)
-def delete_expense(expense_id: int = Path(gt=0), db: Session = Depends(get_db)):
+def delete_expense(expense_id: int = Path(gt=0), db: Session = Depends(get_db)) -> None:
     """
     Delete an expense by its ID.
 
