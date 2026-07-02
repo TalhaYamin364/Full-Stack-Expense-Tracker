@@ -32,7 +32,7 @@ What is Base?
   so it can create them with Base.metadata.create_all().
 """
 
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, event
 from sqlalchemy.orm import sessionmaker, declarative_base
 
 # ─── DATABASE URL ──────────────────────────────────────────
@@ -60,6 +60,16 @@ engine = create_engine(
     connect_args={"check_same_thread": False}
 )
 
+# ─── SQLITE FOREIGN KEY ENFORCEMENT ───────────────────────
+# SQLite does not enforce FK constraints by default — they are silently
+# ignored unless PRAGMA foreign_keys=ON is set per connection.
+# This event listener runs on every new connection so FKs are always active.
+@event.listens_for(engine, "connect")
+def set_sqlite_pragma(dbapi_connection, connection_record):
+    cursor = dbapi_connection.cursor()
+    cursor.execute("PRAGMA foreign_keys=ON")
+    cursor.close()
+
 # ─── SESSION FACTORY ───────────────────────────────────────
 # sessionmaker creates a "factory" that produces database sessions.
 # Each time we call SessionLocal(), we get a new session.
@@ -82,6 +92,7 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 # class User(Base):       ← SQLAlchemy knows this is a table too
 Base = declarative_base()
 
+print(Base)
 
 def get_db():
     """
