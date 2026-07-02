@@ -48,8 +48,8 @@ from api.db_models import Expense, User  # noqa: F401 — imported so SQLAlchemy
 # that are missing. It does NOT modify existing tables (that's what
 # Alembic migrations are for — we'll learn that later).
 #
-# We import db_models.Expense above so that SQLAlchemy's Base.metadata
-# knows the Expense table exists. Without that import, create_all()
+# We import db_models.Expense and User above so that SQLAlchemy's Base.metadata
+# knows both tables exist. Without those imports, create_all()
 # would have nothing to create.
 from api.database import Base
 Base.metadata.create_all(bind=engine)

@@ -103,7 +103,8 @@ class Expense(Base):
           amount      DECIMAL(10,2) NOT NULL,
           category    VARCHAR NOT NULL,
           description VARCHAR DEFAULT '',
-          created_at  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+          created_at  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+          user_id     INTEGER REFERENCES users(id)
       );
 
     Each instance of this class represents ONE ROW in the table.
@@ -167,7 +168,8 @@ class Expense(Base):
     user_id = Column(
         Integer,
         ForeignKey("users.id"),
-        nullable=True   # Nullable for now — Phase 3 auth will enforce this.
+        nullable=True,  # Nullable for now — Phase 3 auth will enforce this.
+        index=True      # Index for fast lookups by user once auth is added.
         # Why nullable? We don't have auth yet, so we can't assign expenses
         # to a real user. Making it nullable avoids having to seed a dummy
         # user just to insert expenses during development.
