@@ -1,0 +1,13 @@
+Generic single-database configuration.
+
+Tables managed by Alembic migrations:
+
+  users
+    Stores registered user accounts.
+    Columns: id (PK), email (unique), hashed_password, created_at
+    Note: hashed_password stores a bcrypt hash — never plaintext. Auth added in Phase 3.
+
+  expenses
+    Stores individual expense records.
+    Columns: id (PK), amount (Numeric 10,2), category, description, created_at, user_id (FK → users.id nullable)
+    Note: user_id is nullable until Phase 3 auth enforces user context on every expense.

@@ -33,7 +33,11 @@ TASKS.md
 6-Month-SE-Transition-Plan.md
 Software-Engineering-Transition-Plan-Condensed.md
 Software-Engineering-Transition-Plan-Condensed.pdf
-docs/sessions/
+docs/
+
+# Workspace & cache
+*.code-workspace
+.ruff_cache/
 
 # Node (for React later)
 node_modules/

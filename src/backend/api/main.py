@@ -36,24 +36,10 @@ To run this server:
 
 from fastapi import FastAPI
 from api.routes import router
-from api.database import engine
-from api.db_models import Expense, User  # noqa: F401 — imported so SQLAlchemy's Base.metadata knows about both tables
 
-# ─── CREATE DATABASE TABLES ────────────────────────────────
-# This is the equivalent of running:
-#   CREATE TABLE IF NOT EXISTS expenses (...);
-#
-# Base.metadata contains info about ALL table classes that inherit from Base.
-# create_all() checks what tables exist in the database and creates any
-# that are missing. It does NOT modify existing tables (that's what
-# Alembic migrations are for — we'll learn that later).
-#
-# We import db_models.Expense and User above so that SQLAlchemy's Base.metadata
-# knows both tables exist. Without those imports, create_all()
-# would have nothing to create.
-from api.database import Base
-Base.metadata.create_all(bind=engine)
-print("✅ Database tables created (or already exist)")
+# Schema is managed entirely by Alembic migrations.
+# Run: alembic upgrade head (from src/backend/) to create or update tables.
+# Never use Base.metadata.create_all() — it bypasses migration version tracking.
 
 # Create the FastAPI application
 # This 'app' object is what Uvicorn looks for (api.main:app)
