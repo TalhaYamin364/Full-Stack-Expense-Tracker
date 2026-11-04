@@ -35,6 +35,11 @@ Software-Engineering-Transition-Plan-Condensed.md
 Software-Engineering-Transition-Plan-Condensed.pdf
 docs/
 
+# GitHub Copilot context & instructions (local only)
+# PULL_REQUEST_TEMPLATE.md stays tracked — GitHub reads it from the repo
+.github/copilot-instructions.md
+.github/instructions/
+
 # Workspace & cache
 *.code-workspace
 .ruff_cache/
@@ -48,3 +53,7 @@ yarn-error.log
 dist/
 build/
 *.egg-info/
+
+# Scratch / demo files
+scratch.py
+src/backend/demo_mod.py
