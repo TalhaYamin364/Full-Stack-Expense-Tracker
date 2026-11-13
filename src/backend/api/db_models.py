@@ -32,7 +32,6 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from api.database import Base
 
-
 class User(Base):
     """
     The 'users' table in our database.

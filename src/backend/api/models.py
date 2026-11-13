@@ -38,7 +38,7 @@ class ExpenseCreate(BaseModel):
     The user must provide amount and category.
     Description is optional (defaults to empty string).
     
-    Notice: No 'id' field here — we generate that in storage.py.
+    Notice: No 'id' field here — the database generates it.
     
     Field() lets us add extra validation rules and documentation:
       - gt=0 means "greater than 0" (no negative or zero amounts)
