@@ -40,6 +40,7 @@ docs/*
 # PULL_REQUEST_TEMPLATE.md stays tracked — GitHub reads it from the repo
 .github/copilot-instructions.md
 .github/instructions/
+.github/prompts/
 .github/appmod/
 
 # Workspace & cache
