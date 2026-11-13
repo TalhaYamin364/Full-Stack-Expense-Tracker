@@ -33,12 +33,14 @@ TASKS.md
 6-Month-SE-Transition-Plan.md
 Software-Engineering-Transition-Plan-Condensed.md
 Software-Engineering-Transition-Plan-Condensed.pdf
-docs/
+docs/*
+!docs/README.md
 
 # GitHub Copilot context & instructions (local only)
 # PULL_REQUEST_TEMPLATE.md stays tracked — GitHub reads it from the repo
 .github/copilot-instructions.md
 .github/instructions/
+.github/appmod/
 
 # Workspace & cache
 *.code-workspace
@@ -56,4 +58,4 @@ build/
 
 # Scratch / demo files
 scratch.py
-src/backend/demo_mod.py
+archive/v1/src/backend/demo_mod.py
